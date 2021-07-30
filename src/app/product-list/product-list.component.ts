@@ -1,4 +1,15 @@
-import { Component } from '@angular/core';
+import {
+  OnChanges,
+  OnInit,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy,
+  Component,
+  Input
+} from '@angular/core';
 
 import { products } from '../products';
 
@@ -7,8 +18,52 @@ import { products } from '../products';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent
+  implements
+    OnChanges,
+    OnInit,
+    DoCheck,
+    AfterContentInit,
+    AfterContentChecked,
+    AfterViewInit,
+    AfterViewChecked,
+    OnDestroy {
+  @Input('joke') data?: string;
   products = products;
+  constructor() {
+    console.log(`new - data is`);
+  }
+  ngOnChanges() {
+    console.log(`ngOnChanges - data is ${this.data}`);
+  }
+
+  ngOnInit() {
+    console.log(`ngOnInit  - data is`);
+  }
+
+  ngDoCheck() {
+    console.log('ngDoCheck');
+  }
+
+  ngAfterContentInit() {
+    console.log('ngAfterContentInit');
+  }
+
+  ngAfterContentChecked() {
+    console.log('ngAfterContentChecked');
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+  }
+
+  ngAfterViewChecked() {
+    console.log('ngAfterViewChecked');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
+  }
   share() {
     window.alert('The product has been shared!');
   }
