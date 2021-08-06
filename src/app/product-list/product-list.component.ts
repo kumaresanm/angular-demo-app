@@ -8,15 +8,21 @@ import {
   AfterViewChecked,
   OnDestroy,
   Component,
-  Input
-} from '@angular/core';
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  ViewEncapsulation
+} from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
-import { products } from '../products';
+import { products } from "../products";
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: "app-product-list",
+  templateUrl: "./product-list.component.html",
+  styleUrls: ["./product-list.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ProductListComponent
   implements
@@ -27,14 +33,19 @@ export class ProductListComponent
     AfterContentChecked,
     AfterViewInit,
     AfterViewChecked,
-    OnDestroy {
-  @Input('joke') data?: string;
+    OnDestroy
+{
+  @Input("joke") data?: string;
+  // @Input("counter") counter?: string;
   products = products;
-  constructor() {
-    console.log(`new - data is`);
+  productName: string;
+  constructor(private activatedRoute: ActivatedRoute) {
+    console.log(`constructor`);
+    this.productName = "All";
   }
   ngOnChanges() {
     console.log(`ngOnChanges - data is ${this.data}`);
+    console.log(this.activatedRoute);
   }
 
   ngOnInit() {
@@ -42,30 +53,34 @@ export class ProductListComponent
   }
 
   ngDoCheck() {
-    console.log('ngDoCheck');
+    console.log("ngDoCheck");
   }
 
   ngAfterContentInit() {
-    console.log('ngAfterContentInit');
+    console.log("ngAfterContentInit");
   }
 
   ngAfterContentChecked() {
-    console.log('ngAfterContentChecked');
+    console.log("ngAfterContentChecked");
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
+    console.log("ngAfterViewInit");
   }
 
   ngAfterViewChecked() {
-    console.log('ngAfterViewChecked');
+    console.log("ngAfterViewChecked");
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+    console.log("ngOnDestroy");
   }
   share() {
-    window.alert('The product has been shared!');
+    window.alert("The product has been shared!");
+    // this.data = "papa";
+  }
+  executeFunction() {
+    console.log("child loaded");
   }
 }
 

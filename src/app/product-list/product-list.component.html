@@ -1,10 +1,13 @@
 <h2>Products</h2>
 
-<div *ngFor="let product of products">
+<h3>Search a product</h3>
+<input type="text" [(ngModel)]="productName">
+<div *ngFor="let product of products  | myPipeDemo: productName">
 
   <h3>
-    <a [title]="product.name + ' details'" [routerLink]="['/products','product.Id']">
-      {{ product.name }}
+    <a [title]="product.name + ' details'" [routerLink]="['/products',product.id]">
+      {{ product.name}}
+      {{executeFunction()}}
     </a>
   </h3>
 
@@ -15,5 +18,6 @@
   <button (click)="share()">
     Share
   </button>
-
 </div>
+
+<!-- <router-outlet></router-outlet> -->
