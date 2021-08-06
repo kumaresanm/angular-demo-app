@@ -1,5 +1,10 @@
 <h2>Products</h2>
-
+<p>Merge Map</p>
+<input type="text" #input1>
+<input type="text" #input2>
+<p>Combined Value: <span id="span1"></span></p>
+<p>Switch Map</p>
+<button>Click Me</button>
 <h3>Search a product</h3>
 <input type="text" [(ngModel)]="productName">
 <div *ngFor="let product of products  | myPipeDemo: productName">

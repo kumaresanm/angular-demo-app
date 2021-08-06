@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { concat, Observable, of, Subject } from "rxjs";
 
 @Component({
@@ -10,6 +10,9 @@ export class AppComponent implements OnInit {
   data = "Kumar";
   counter = 0;
 
+  loading = true;
+
+  constructor(){}
   updateCounter() {
     this.counter += 1;
   }

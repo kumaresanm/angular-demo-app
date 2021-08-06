@@ -11,9 +11,13 @@ import {
   Input,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ViewChild,
+  ElementRef,
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Event } from "@angular/router";
+import { fromEvent } from "rxjs";
+import { mergeMap, map } from "rxjs/operators";
 
 import { products } from "../products";
 
@@ -22,7 +26,7 @@ import { products } from "../products";
   templateUrl: "./product-list.component.html",
   styleUrls: ["./product-list.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ProductListComponent
   implements
@@ -38,10 +42,11 @@ export class ProductListComponent
   @Input("joke") data?: string;
   // @Input("counter") counter?: string;
   products = products;
-  productName: string;
+  productName = "All";
+  @ViewChild("input1") public input1!: ElementRef;
+  @ViewChild("input2") public input2!: ElementRef;
   constructor(private activatedRoute: ActivatedRoute) {
     console.log(`constructor`);
-    this.productName = "All";
   }
   ngOnChanges() {
     console.log(`ngOnChanges - data is ${this.data}`);
@@ -66,6 +71,22 @@ export class ProductListComponent
 
   ngAfterViewInit() {
     console.log("ngAfterViewInit");
+    let obs1 = fromEvent(this.input1.nativeElement, "input");
+    let obs2 = fromEvent(this.input2.nativeElement, "input");
+
+    obs1
+      .pipe(
+        mergeMap((event1: any) => {
+          return obs2.pipe(
+            map((event2: any) => event1.target.value + event2.target.value)
+          );
+        })
+      )
+      .subscribe((data) => {
+        let span = document.querySelector("#span1");
+        if (span) span.textContent = data;
+        console.log(span);
+      });
   }
 
   ngAfterViewChecked() {
