@@ -1,3 +1,42 @@
-<p>
-product-details works!
-</p>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+ 
+    <p>
+      <label for="firstname">First Name </label>
+      <input type="text" id="firstname" name="firstname" formControlName="firstname">
+    </p>
+   
+    <p>
+      <label for="lastname">Last Name </label>
+      <input type="text" id="lastname" name="lastname" formControlName="lastname">
+    </p>
+   
+    <p>
+      <label for="email">Email </label>
+      <input type="text" id="email" name="email" formControlName="email">
+    </p>
+   
+    <p>
+      <label for="gender">Geneder </label>
+      <input type="radio" value="male" id="gender" name="gender" formControlName="gender"> Male
+      <input type="radio" value="female" id="gender" name="gender" formControlName="gender"> Female
+    </p>
+   
+    <p>
+      <label for="isMarried">Married </label>
+      <input type="checkbox" id="isMarried" name="isMarried" formControlName="isMarried">
+    </p>
+   
+    <p>
+      <label for="country">country </label>
+      <select id="country" name="country"  formControlName="country">
+        <option [ngValue]="c.id" *ngFor="let c of countryList">
+          {{c.name}}
+        </option>
+      </select>
+    </p>
+   
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+   
+  </form>

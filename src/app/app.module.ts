@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { ActivatedRouteSnapshot, RouterModule } from "@angular/router";
+import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
@@ -8,6 +8,7 @@ import { TopBarComponent } from "./top-bar/top-bar.component";
 import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { MyPipeDemoPipe } from "./my-pipe-demo.pipe";
+import { AuthGuardService } from "./services/auth-guard.service";
 
 @NgModule({
   imports: [
@@ -15,8 +16,16 @@ import { MyPipeDemoPipe } from "./my-pipe-demo.pipe";
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: "", component: ProductListComponent },
-      { path: "products/:productId", component: ProductDetailsComponent },
+      {
+        path: "products",
+        component: ProductListComponent,
+      },
+      {
+        path: "products/:productId",
+        component: ProductDetailsComponent,
+        // canActivate: [AuthGuardService],
+      },
+      { path: "", redirectTo: "/products", pathMatch: "full" },
     ]),
   ],
   declarations: [
