@@ -9,6 +9,7 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { MyPipeDemoPipe } from "./my-pipe-demo.pipe";
 import { AuthGuardService } from "./services/auth-guard.service";
+import { TemplateOutletComponent } from './template-outlet/template-outlet.component';
 
 @NgModule({
   imports: [
@@ -21,20 +22,26 @@ import { AuthGuardService } from "./services/auth-guard.service";
         component: ProductListComponent,
       },
       {
+        path: "templateOutletDemo",
+        component: TemplateOutletComponent,
+      },
+      {
         path: "products/:productId",
         component: ProductDetailsComponent,
         // canActivate: [AuthGuardService],
       },
       { path: "", redirectTo: "/products", pathMatch: "full" },
+
     ]),
   ],
-  declarations: [
+  declarations: [	
     AppComponent,
     TopBarComponent,
     ProductListComponent,
     ProductDetailsComponent,
     MyPipeDemoPipe,
-  ],
+      TemplateOutletComponent
+   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,11 +1,7 @@
 <app-top-bar (click)="updateCounter()"></app-top-bar>
 <span *ngIf="loading"></span>
+
+<a [routerLink]="['templateOutletDemo']">Template Output Demo</a>
 <div class="container">
-  <!-- <app-product-list></app-product-list> -->
   <router-outlet></router-outlet>
 </div>
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
--->

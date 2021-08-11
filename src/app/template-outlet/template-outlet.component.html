@@ -1,0 +1,41 @@
+<h3>Example 1</h3>
+
+<!--  This is our template. template1 is the template reference variable holds the reference to the Template
+  template1 is of type TemplateRef This won't be rendered here -->
+
+<ng-template #template1>
+  <p>
+    This is our template. It will be displayed on the div
+    *ngTemplateOutlet="myTemplateRef"
+  </p>
+</ng-template>
+
+<p>The Template appears after this</p>
+
+<!-- 
+  We want to render the above template here.
+  Hence we use the ngTemplateOutlet directive 
+  Assign template1 to ngTemplateOutlet
+-->
+
+<ng-container *ngTemplateOutlet="template1">
+  This text is not displayed
+</ng-container>
+
+<!-- 
+  Use can use any element. 
+  Here we use div instead of ng-container
+  Div is not rendered 
+-->
+
+<div *ngTemplateOutlet="template1">
+  This is using div, and this content will be replaced with template content
+</div>
+
+<ng-container
+  [ngTemplateOutlet]="messageTemplate"
+  [ngTemplateOutletContext]="{ value: 'Kumar' }"
+></ng-container>
+<ng-template let-value="value" #messageTemplate>
+  <p>Hello {{ value }}, passing context to template using</p>
+</ng-template>
